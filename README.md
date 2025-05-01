@@ -1,4 +1,4 @@
-# 🚀 Bluesky Poster App
+# 🚀 WoPe (Write Once, Post Everywhere) para iOS
 
 Una pequeña app en SwiftUI para publicar posts en una cuenta de **Bluesky** desde tu iPhone. Diseñada para uso personal sin necesidad de publicar en la App Store.
 
