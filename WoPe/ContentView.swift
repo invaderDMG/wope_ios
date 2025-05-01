@@ -1,61 +1,75 @@
-//
-//  ContentView.swift
-//  WoPe
-//
-//  Created by Juan Garcia on 1/5/25.
-//
-
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @State private var isPublishing = false
+    @State private var publishedText: String? = nil
+    @State private var postText: String = ""
+    @State private var postToBluesky: Bool = false
+    @State private var statusMessage: String = ""
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Escribe tu publicación:")
+                .font(.headline)
+
+            TextEditor(text: $postText)
+                .frame(height: 150)
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray))
+
+            Toggle("Bluesky", isOn: $postToBluesky)
+
+            Button("Enviar") {
+                if isPublishing {
+                    ProgressView("Publicando...").padding()
+                }
+                if postToBluesky {
+                    isPublishing = true
+                    statusMessage = ""
+                    BlueskyService().post(text: postText) { result in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success(let response):
+                                statusMessage = "✅ Publicado con éxito"
+                                publishedText = postText
+                                postText = ""
+                            case .failure(let error):
+                                statusMessage = "❌ Error: \(error.localizedDescription)"
+                            }
+                        }
                     }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                } else {
+                    statusMessage = "Debes seleccionar una plataforma."
                 }
             }
-        } detail: {
-            Text("Select an item")
-        }
-    }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
+            Text(statusMessage)
+                .foregroundColor(.gray)
+                .padding(.top)
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+            Spacer()
+        }
+        .padding()
+        if let post = publishedText {
+            Divider().padding(.top)
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text("👤 Juan_Roboto")
+                    .font(.headline)
+                Text(post)
+                    .font(.body)
+                Text("🕒 Justo ahora")
+                    .font(.caption)
+                    .foregroundColor(.gray)
             }
+            .padding()
+            .background(Color(UIColor.secondarySystemBackground))
+            .cornerRadius(10)
+            .padding(.horizontal)
         }
     }
-}
-
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+    
 }

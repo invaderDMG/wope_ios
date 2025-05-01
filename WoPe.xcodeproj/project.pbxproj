@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		76311A342DC3F51800C6522B /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76311A332DC3F51300C6522B /* Secrets.plist */; };
+		76311A362DC3F57100C6522B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 76311A352DC3F56C00C6522B /* .gitignore */; };
+		76311A3A2DC3F5A500C6522B /* Secrets.sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76311A392DC3F5A200C6522B /* Secrets.sample.plist */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		76311A142DC3ECD300C6522B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +33,9 @@
 		76311A042DC3ECD200C6522B /* WoPe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoPe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76311A132DC3ECD300C6522B /* WoPeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WoPeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76311A1D2DC3ECD300C6522B /* WoPeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WoPeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76311A332DC3F51300C6522B /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secrets.plist; sourceTree = "<group>"; };
+		76311A352DC3F56C00C6522B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		76311A392DC3F5A200C6522B /* Secrets.sample.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secrets.sample.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +84,9 @@
 		763119FB2DC3ECD200C6522B = {
 			isa = PBXGroup;
 			children = (
+				76311A392DC3F5A200C6522B /* Secrets.sample.plist */,
+				76311A352DC3F56C00C6522B /* .gitignore */,
+				76311A332DC3F51300C6522B /* Secrets.plist */,
 				76311A062DC3ECD200C6522B /* WoPe */,
 				76311A162DC3ECD300C6522B /* WoPeTests */,
 				76311A202DC3ECD300C6522B /* WoPeUITests */,
@@ -212,6 +224,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76311A342DC3F51800C6522B /* Secrets.plist in Resources */,
+				76311A362DC3F57100C6522B /* .gitignore in Resources */,
+				76311A3A2DC3F5A500C6522B /* Secrets.sample.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
